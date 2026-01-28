@@ -1,0 +1,568 @@
+################################################################################
+### Pacientes
+################################################################################
+
+### GET all pacientes
+GET http://localhost:3000/api/pacientes
+
+### GET paciente by ID (Existente)
+# Reemplaza '1' con un ID de paciente que exista en tu DB.
+GET http://localhost:3000/api/pacientes/1
+
+### GET paciente by ID (No existente)
+# Debería devolver 404 "Paciente no encontrado."
+GET http://localhost:3000/api/pacientes/9999
+
+### GET paciente by ID (ID inválido - no numérico)
+# Debería devolver 400 "El ID del paciente debe ser un número entero válido."
+GET http://localhost:3000/api/pacientes/abc
+
+### POST create new paciente (Válido)
+POST http://localhost:3000/api/pacientes
+Content-Type: application/json
+
+{
+    "documento": "12345678",
+    "nombre1": "Pablo",
+    "nombre2": "Martin",
+    "apellido1": "Salgado",
+    "apellido2": "Perez",
+    "fecha_nacimiento": "1990-03-27",
+    "sexo": "M",
+    "direccion": "Av. Libertador 1235",
+    "telefono": "099123457",
+    "centro_id": null
+}
+
+### POST create new paciente (Faltan campos obligatorios - Ej. 'documento')
+# Debería devolver 400 "Errores de validación: El documento es obligatorio."
+POST http://localhost:3000/api/pacientes
+Content-Type: application/json
+
+{
+    "nombre1": "Sin Doc",
+    "apellido1": "Test",
+    "fecha_nacimiento": "2000-01-01",
+    "sexo": "F",
+    "direccion": "Calle Test 123",
+    "telefono": "099123450",
+    "centro_id": null
+}
+
+### POST create new paciente (Documento duplicado)
+# Asegúrate de que el documento exista en tu DB. Debería devolver 409 "Ya existe un paciente con el documento proporcionado."
+POST http://localhost:3000/api/pacientes
+Content-Type: application/json
+
+{
+    "documento": "12345679",
+    "nombre1": "Otro Pablo",
+    "apellido1": "Otro Gomez",
+    "fecha_nacimiento": "1991-01-01",
+    "sexo": "M",
+    "direccion": "Calle Falsa 123",
+    "telefono": "099111111",
+    "centro_id": null
+}
+
+### POST create new paciente (centro_id no existente)
+# Debería devolver 400 "El ID del centro proporcionado no existe."
+POST http://localhost:3000/api/pacientes
+Content-Type: application/json
+
+{
+    "documento": "12345670",
+    "nombre1": "Paciente Centro Invalido",
+    "apellido1": "Test",
+    "fecha_nacimiento": "1995-07-07",
+    "sexo": "F",
+    "direccion": "Calle Test 456",
+    "telefono": "099555555",
+    "centro_id": 99999
+}
+
+### PUT update paciente by ID (Actualización parcial válida)
+# Reemplaza '2' con el ID de un paciente existente.
+PUT http://localhost:3000/api/pacientes/2
+Content-Type: application/json
+
+{
+    "nombre1": "Maria Paula",
+    "apellido1": "Gomez",
+    "sexo": "F",
+    "telefono": "099123456"
+}
+
+### PUT update paciente by ID (Cambio de documento a uno duplicado)
+# Reemplaza '3' con un ID de paciente existente.
+# Reemplaza '12345679' con un documento que YA exista en otro paciente.
+# Debería devolver 409 "Ya existe un paciente con el documento proporcionado."
+PUT http://localhost:3000/api/pacientes/3
+Content-Type: application/json
+
+{
+    "documento": "12345679"
+}
+
+### PUT update paciente by ID (Actualizar centro_id a uno no existente)
+# Reemplaza '4' con un ID de paciente existente.
+# Debería devolver 400 "El ID del centro proporcionado no existe."
+PUT http://localhost:3000/api/pacientes/1
+Content-Type: application/json
+
+{
+    "centro_id": 99999 
+}
+
+### PUT update paciente by ID (No existente)
+# Debería devolver 404 "Paciente no encontrado para actualizar."
+PUT http://localhost:3000/api/pacientes/9999
+Content-Type: application/json
+
+{
+    "nombre1": "Paciente Inexistente"
+}
+
+### DELETE paciente by ID (Existente)
+# Reemplaza '2' con el ID del paciente que deseas eliminar.
+# ¡Asegúrate de que no tenga expedientes asociados para evitar 409 Conflict!
+DELETE http://localhost:3000/api/pacientes/1
+
+### DELETE paciente by ID (No existente)
+# Debería devolver 404 "Paciente no encontrado para eliminar."
+DELETE http://localhost:3000/api/pacientes/9999
+
+### DELETE paciente by ID (Con expedientes asociados)
+# Reemplaza '5' con un ID de paciente que tenga al menos un expediente asociado.
+# Debería devolver 409 "No se puede eliminar el paciente porque tiene expedientes asociados."
+DELETE http://localhost:3000/api/pacientes/5
+
+################################################################################
+### Expedientes
+################################################################################
+
+### GET all expedientes
+GET http://localhost:3000/api/expedientes
+
+### GET expediente by ID (Existente)
+# Reemplaza '1' con un ID de expediente que exista en tu DB.
+GET http://localhost:3000/api/expedientes/1
+
+### GET expediente by ID (No existente)
+# Debería devolver 404 "Expediente no encontrado."
+GET http://localhost:3000/api/expedientes/9999
+
+### GET expediente by ID (ID inválido - no numérico)
+# Debería devolver 400 "El ID del expediente debe ser un número entero válido."
+GET http://localhost:3000/api/expedientes/xyz
+
+### GET resoluciones by Expediente ID (Existente)
+# Reemplaza '1' con un ID de expediente que exista y tenga resoluciones asociadas.
+GET http://localhost:3000/api/expedientes/1/resoluciones
+
+### GET resoluciones by Expediente ID (Expediente no existente)
+# Debería devolver 404 "Expediente no encontrado."
+GET http://localhost:3000/api/expedientes/9999/resoluciones
+
+### GET expedientes by Paciente Documento (Existente)
+# Reemplaza '12345679' con el documento de un paciente que tenga expedientes.
+GET http://localhost:3000/api/expedientes/documento-paciente/12345679
+
+### GET expedientes by Paciente Documento (No existente)
+# Debería devolver un array vacío o 404 "No se encontraron expedientes para el documento..." (depende de tu implementación específica)
+GET http://localhost:3000/api/expedientes/documento-paciente/99999999
+
+### POST create new expediente (Válido)
+# Asegúrate de que paciente_id y especificacion_id existan en tu DB.
+POST http://localhost:3000/api/expedientes
+Content-Type: application/json
+
+{
+    "fecha_inicio": "2025-05-30",
+    "rnt": "RNT-POST-EXP-VALIDO",
+    "caso_nuevo": true,
+    "especificacion_id": 3,
+    "observaciones": "Expediente de prueba con especificacion existente.",
+    "paciente_id": 7
+}
+
+### POST create new expediente (Faltan campos obligatorios - Ej. 'rnt')
+# Debería devolver 400 "Errores de validación: El RNT es obligatorio."
+POST http://localhost://localhost:3000/api/expedientes
+Content-Type: application/json
+
+{
+    "fecha_inicio": "2025-05-23",
+    "caso_nuevo": false,
+    "especificacion_id": 1,
+    "observaciones": "Falta RNT.",
+    "paciente_id": 5
+}
+
+### POST create new expediente (paciente_id no existente)
+# Debería devolver 400 "El ID de paciente proporcionado no existe."
+POST http://localhost:3000/api/expedientes
+Content-Type: application/json
+
+{
+    "fecha_inicio": "2025-05-24",
+    "rnt": "RNT-PAC-INVALIDO",
+    "caso_nuevo": true,
+    "especificacion_id": 1,
+    "observaciones": "Paciente ID 9999 no existe.",
+    "paciente_id": 9999
+}
+
+### POST create new expediente (especificacion_id no existente)
+# Debería devolver 400 "El ID de la especificación proporcionada no existe."
+POST http://localhost:3000/api/expedientes
+Content-Type: application/json
+
+{
+    "fecha_inicio": "2025-05-25",
+    "rnt": "RNT-ESP-INVALIDA",
+    "caso_nuevo": false,
+    "especificacion_id": 9999,
+    "observaciones": "Especificacion ID 9999 no existe.",
+    "paciente_id": 1
+}
+
+### PUT update expediente by ID (Actualización parcial válida)
+# Reemplaza '1' con el ID de un expediente existente.
+PUT http://localhost:3000/api/expedientes/1
+Content-Type: application/json
+
+{
+    "rnt": "RNT-PUT-PARCIAL",
+    "observaciones": "Solo se actualizan RNT y observaciones."
+}
+
+### PUT update expediente by ID (Cambiar paciente_id a uno no existente)
+# Reemplaza '2' con el ID de un expediente existente.
+# Debería devolver 400 "El ID de paciente proporcionado no existe."
+PUT http://localhost:3000/api/expedientes/2
+Content-Type: application/json
+
+{
+    "paciente_id": 9999
+}
+
+### PUT update expediente by ID (Cambiar especificacion_id a una no existente)
+# Reemplaza '3' con el ID de un expediente existente.
+# Debería devolver 400 "El ID de la especificación proporcionada no existe."
+PUT http://localhost:3000/api/expedientes/3
+Content-Type: application/json
+
+{
+    "especificacion_id": 9999
+}
+
+### PUT update expediente by ID (Expediente no existente)
+# Debería devolver 404 "Expediente no encontrado para actualizar."
+PUT http://localhost:3000/api/expedientes/9999
+Content-Type: application/json
+
+{
+    "rnt": "RNT-PUT-NOEXISTE"
+}
+
+### DELETE expediente by ID (Existente)
+# Reemplaza '1' con el ID del expediente que deseas eliminar.
+# ¡Asegúrate de que no tenga resoluciones asociadas para evitar 409 Conflict!
+DELETE http://localhost:3000/api/expedientes/1
+
+### DELETE expediente by ID (No existente)
+# Debería devolver 404 "Expediente no encontrado para eliminar."
+DELETE http://localhost:3000/api/expedientes/9999
+
+### DELETE expediente by ID (Con resoluciones asociadas)
+# Reemplaza '4' con un ID de expediente que tenga al menos una resolución asociada.
+# Debería devolver 409 "No se puede eliminar el expediente porque tiene resoluciones asociadas."
+DELETE http://localhost:3000/api/expedientes/4
+
+################################################################################
+### Resoluciones
+################################################################################
+
+### GET all resoluciones
+GET http://localhost:3000/api/resoluciones
+
+### GET resolucion by ID (Existente)
+# Reemplaza '1' con un ID de resolución que exista en tu DB.
+GET http://localhost:3000/api/resoluciones/1
+
+### GET resolucion by ID (No existente)
+# Debería devolver 404 "Resolución no encontrada."
+GET http://localhost:3000/api/resoluciones/9999
+
+### GET resolucion by ID (ID inválido - no numérico)
+# Debería devolver 400 "El ID de la resolución debe ser un número entero válido."
+GET http://localhost:3000/api/resoluciones/abc
+
+### POST create new resolucion (Válido)
+# Asegúrate de que 'expediente_id' exista en tu tabla 'expedientes'.
+POST http://localhost:3000/api/resoluciones
+Content-Type: application/json
+
+{
+    "fecha": "2025-05-29",
+    "descripcion": "Resolución de prueba con estado y cuotas automatizadas (válido).",
+    "importe_total": 10000.00,
+    "importe_cuota": 0.00,
+    "expediente_id": 1, 
+    "items_resolucion": [  
+        {
+            "tipo_item_id": 1,       
+            "importe": 5000.00,   
+            "cantidad_cuotas": 1,   
+            "cuota_actual_item": 1   
+        },
+        {
+            "tipo_item_id": 2,
+            "importe": 2500.00,
+            "cantidad_cuotas": 12,
+            "cuota_actual_item": 1
+        }
+    ]
+}
+
+### POST create new resolucion (Faltan campos obligatorios - Ej. 'importe_total')
+# Debería devolver 400 "Errores de validación: El importe total es obligatorio."
+POST http://localhost:3000/api/resoluciones
+Content-Type: application/json
+
+{
+    "fecha": "2025-05-29",
+    "descripcion": "Resolución sin importe total.",
+    "importe_cuota": 0.00,
+    "expediente_id": 1
+}
+
+### POST create new resolucion (expediente_id no existente)
+# Debería devolver 400 "El ID de expediente proporcionado no existe."
+POST http://localhost:3000/api/resoluciones
+Content-Type: application/json
+
+{
+    "fecha": "2025-05-29",
+    "descripcion": "Resolución con expediente ID inválido.",
+    "importe_total": 500.00,
+    "importe_cuota": 0.00,
+    "expediente_id": 9999 // ID de expediente que NO existe
+}
+
+### POST create new resolucion (importe_total negativo)
+# Debería devolver 400 "El importe total debe ser un número positivo."
+POST http://localhost:3000/api/resoluciones
+Content-Type: application/json
+
+{
+    "fecha": "2025-05-29",
+    "descripcion": "Resolución con importe total negativo.",
+    "importe_total": -100.00,
+    "importe_cuota": 0.00,
+    "expediente_id": 1
+}
+
+### POST create new resolucion (importe_cuota mayor que importe_total)
+# Debería devolver 400 "El importe de la cuota no puede ser mayor que el importe total."
+POST http://localhost:3000/api/resoluciones
+Content-Type: application/json
+
+{
+    "fecha": "2025-05-29",
+    "descripcion": "Resolución con cuota mayor que total.",
+    "importe_total": 100.00,
+    "importe_cuota": 200.00,
+    "expediente_id": 1
+}
+
+### PUT update resolucion by ID (Actualización parcial válida)
+# Reemplaza '1' con el ID de una resolución existente.
+PUT http://localhost:3000/api/resoluciones/1
+Content-Type: application/json
+
+{
+    "descripcion": "Resolución actualizada con nueva descripción.",
+    "importe_total": 12000.00
+}
+
+### PUT update resolucion by ID (Actualizar expediente_id a uno no existente)
+# Reemplaza '2' con el ID de una resolución existente.
+# Debería devolver 400 "El ID de expediente proporcionado no existe."
+PUT http://localhost:3000/api/resoluciones/2
+Content-Type: application/json
+
+{
+    "expediente_id": 9999
+}
+
+### PUT update resolucion by ID (Importe cuota > Importe total)
+# Reemplaza '3' con el ID de una resolución existente.
+# Debería devolver 400 "El importe de la cuota no puede ser mayor que el importe total."
+PUT http://localhost:3000/api/resoluciones/3
+Content-Type: application/json
+
+{
+    "importe_total": 500.00,
+    "importe_cuota": 1000.00
+}
+
+### PUT update resolucion by ID (Resolución no existente)
+# Debería devolver 404 "Resolución no encontrada para actualizar."
+PUT http://localhost:3000/api/resoluciones/9999
+Content-Type: application/json
+
+{
+    "descripcion": "Resolución inexistente"
+}
+
+### DELETE resolucion by ID (Existente)
+# Reemplaza '1' con el ID de la resolución que deseas eliminar.
+DELETE http://localhost:3000/api/resoluciones/1
+
+### DELETE resolucion by ID (No existente)
+# Debería devolver 404 "Resolución no encontrada para eliminar."
+DELETE http://localhost:3000/api/resoluciones/9999
+
+
+################################################################################
+### Centros
+################################################################################
+
+### GET all centros
+GET http://localhost:3000/api/centros
+
+### GET centro by ID (Existente)
+# Reemplaza '1' con un ID de centro que exista en tu DB.
+GET http://localhost:3000/api/centros/1
+
+### GET centro by ID (No existente)
+# Debería devolver 404 "Centro no encontrado."
+GET http://localhost:3000/api/centros/9999
+
+### GET centro by ID (ID inválido - no numérico)
+# Debería devolver 400 "El ID del centro debe ser un número entero válido."
+GET http://localhost:3000/api/centros/abc
+
+### GET pacientes by Centro ID (Existente)
+# Reemplaza '1' con un ID de centro que exista y tenga pacientes asociados.
+GET http://localhost:3000/api/centros/1/pacientes
+
+### GET pacientes by Centro ID (Centro no existente)
+# Debería devolver 404 "Centro no encontrado."
+GET http://localhost:3000/api/centros/9999/pacientes
+
+### POST create new centro (Válido)
+# Asegúrate de que 'departamento_id' exista en tu tabla 'departamentos'.
+POST http://localhost:3000/api/centros
+Content-Type: application/json
+
+{
+    "codigo": "CEN004",
+    "nombre": "Centro Periférico Pasteur",
+    "departamento_id": 2,
+    "estado": true,
+    "telefono": "22001122",
+    "email": "contacto@central.com"
+}
+
+### POST create new centro (Faltan campos obligatorios - Ej. 'nombre')
+# Debería devolver 400 "Errores de validación: El nombre es obligatorio."
+POST http://localhost:3000/api/centros
+Content-Type: application/json
+
+{
+    "codigo": "CEN-TEST-INVALIDO",
+    "departamento_id": 1,
+    "estado": true
+}
+
+### POST create new centro (Codigo duplicado)
+# Asegúrate de que el código exista en tu DB. Debería devolver 409 "Ya existe un centro con el código proporcionado."
+POST http://localhost:3000/api/centros
+Content-Type: application/json
+
+{
+    "codigo": "CEN002",
+    "nombre": "Centro Duplicado",
+    "departamento_id": 2,
+    "estado": true
+}
+
+### POST create new centro (departamento_id no existente)
+# Debería devolver 400 "El ID de departamento proporcionado no existe."
+POST http://localhost:3000/api/centros
+Content-Type: application/json
+
+{
+    "codigo": "CEN-DEP-INVALIDO",
+    "nombre": "Centro con Dept Invalido",
+    "departamento_id": 9999,
+    "estado": true
+}
+
+### PUT update centro by ID (Actualización parcial válida)
+# Reemplaza '1' con el ID de un centro existente.
+PUT http://localhost:3000/api/centros/1
+Content-Type: application/json
+
+{
+    "nombre": "Centro de Atención Renovado",
+    "estado": false,
+    "telefono": "22003344"
+}
+
+### PUT update centro by ID (Cambiar nombre a uno duplicado)
+# Reemplaza '2' con un ID de centro existente.
+# Reemplaza 'Centro de Atencion Central' con un nombre que YA exista en otro centro.
+# Debería devolver 409 "El nombre proporcionado ya está en uso por otro centro."
+PUT http://localhost:3000/api/centros/1
+Content-Type: application/json
+
+{
+    "nombre": "Centro de Atencion Central"
+}
+
+### PUT update centro by ID (Actualizar departamento_id a uno no existente)
+# Reemplaza '3' con un ID de centro existente.
+# Debería devolver 400 "El ID de departamento proporcionado no existe."
+PUT http://localhost:3000/api/centros/3
+Content-Type: application/json
+
+{
+    "departamento_id": 9999
+}
+
+### PUT update centro by ID (Establecer telefono a null)
+# Reemplaza '4' con un ID de centro existente.
+# Asegúrate de que la columna 'telefono' en tu DB acepte NULL.
+PUT http://localhost:3000/api/centros/4
+Content-Type: application/json
+
+{
+    "telefono": null
+}
+
+### PUT update centro by ID (Centro no existente)
+# Debería devolver 404 "Centro no encontrado para actualizar."
+PUT http://localhost:3000/api/centros/9999
+Content-Type: application/json
+
+{
+    "nombre": "Centro Inexistente"
+}
+
+### DELETE centro by ID (Existente)
+# Reemplaza '1' con el ID del centro que deseas eliminar.
+# ¡Asegúrate de que no tenga pacientes asociados para evitar 409 Conflict!
+DELETE http://localhost:3000/api/centros/1
+
+### DELETE centro by ID (No existente)
+# Debería devolver 404 "Centro no encontrado para eliminar."
+DELETE http://localhost:3000/api/centros/9999
+
+### DELETE centro by ID (Con pacientes asociados)
+# Reemplaza '5' con un ID de centro que tenga al menos un paciente asociado.
+# Debería devolver 409 "No se puede eliminar el centro porque tiene pacientes o dependencias asociadas."
+DELETE http://localhost:3000/api/centros/5

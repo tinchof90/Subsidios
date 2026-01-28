@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #4CAF50; /* Un verde más agradable, "success" */
+    --primary-dark: #388E3C;
+    --secondary-color: #2196F3; /* Azul para acciones secundarias */
+    --secondary-dark: #1976D2;
+    --accent-color: #FFC107; /* Amarillo/Ámbar para resaltados */
+    --text-color-dark: #333333;
+    --text-color-light: #ffffff;
+    --background-light: #f4f7f6; /* Fondo general más claro */
+    --background-card: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.12);
+    --error-color: #DC143C; /* Rojo para errores */
+    --warning-color: #F4A460; /* Naranja para advertencias/editar */
+}

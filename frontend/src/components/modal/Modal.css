@@ -1,0 +1,121 @@
+/* src/components/Modal.css - Versión mejorada */
+
+/* --- Overlay --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* --- Modal content --- */
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  width: 90%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: translateY(-20px);
+  opacity: 0;
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* --- Animaciones --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Header --- */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+/* --- Close button --- */
+.modal-close-button {
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.modal-close-button:hover {
+  color: #e74c3c; /* rojo más visible al pasar el mouse */
+}
+
+/* --- Body --- */
+.modal-body p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #555;
+  text-align: center; /* centra el texto automáticamente */
+}
+
+/* --- Footer / Botones --- */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+/* Botones generales */
+.modal-footer .btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+/* Botón primario */
+.modal-footer .btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #2980b9;
+}
+
+/* Botón de cancelar */
+.modal-footer .btn-cancel {
+  background-color: #ecf0f1;
+  color: #555;
+}
+
+.modal-footer .btn-cancel:hover {
+  background-color: #d0d3d4;
+}

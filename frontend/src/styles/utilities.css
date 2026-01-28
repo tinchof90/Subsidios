@@ -1,0 +1,20 @@
+/* src/styles/_utilities.css */
+/* Clases de utilidad muy genéricas si las usas */
+/* .text-center { text-align: center; } */
+/* .m-top-20 { margin-top: 20px; } */
+
+/* Mensajes de estado (cargando, error, sin pacientes) */
+.list-container > p { /* Este es un estilo genérico para cualquier <p> dentro de un .list-container */
+    text-align: center;
+    color: #666;
+    font-size: 1.1em;
+    margin-top: 30px;
+}
+.list-container > div[style*="color: red"] {
+    border: 1px solid var(--error-color);
+    padding: 15px;
+    background-color: #ffe0e0;
+    border-radius: 8px;
+    margin-top: 20px;
+    color: var(--error-color) !important;
+}

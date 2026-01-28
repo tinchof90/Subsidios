@@ -1,0 +1,156 @@
+/* Estilos básicos para los botones (base general) */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color); /* Usamos la variable global */
+  color: var(--text-color-light);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark); /* Usamos la variable global */
+}
+
+.btn-secondary {
+  background-color: #cacfd2; /* Usamos la variable global */
+  color: black;
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Sombra muy ligera */
+}
+
+.btn-secondary:hover {
+  background-color: #bdc3c7; /* Usamos la variable global */
+}
+
+.btn-cancel {
+  background-color: #6c757d; /* Considerar crear una variable para este gris si se usa mucho */
+  color: var(--text-color-light);
+}
+
+.btn-cancel:hover {
+  background-color: #5a6268;
+}
+
+/* Estilos de Botones Generales */
+.btn-create {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 10px 25px; /* Más padding */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+    min-width: 180px; /* Ajustado para mejor control del ancho */
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    letter-spacing: 0.7px; /* Ligeramente más espaciado entre letras */
+}
+
+.btn-create:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25); /* Sombra más pronunciada */
+}
+
+.btn-create:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Estilos mejorados para btn-danger */
+.btn-danger {
+    padding: 12px 25px;
+    background-image: linear-gradient(to right, #e74c3c 0%, #c0392b 100%); /* Degradado de rojo */
+    color: var(--text-color-light);
+    border: 1px solid #a93226; /* Borde más oscuro */
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.2s ease; /* Transición para todos los cambios */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+    min-width: 120px;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-image: linear-gradient(to right, #c0392b 0%, #e74c3c 100%); /* Invertir degradado al pasar el ratón */
+    transform: translateY(-2px); /* Pequeño levantamiento */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra aún más fuerte */
+}
+
+.btn-danger:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+    background-image: none; /* Eliminar degradado cuando está deshabilitado */
+}
+
+/* Estilo específico para btn-small dentro de btn-danger, como para eliminar ítems */
+.btn-danger.btn-small {
+    padding: 8px 15px; /* Menor padding para botones pequeños */
+    font-size: 0.9em;
+    min-width: unset; /* Quita el min-width si es pequeño */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger.btn-small:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-icon {
+    width: 44px;
+    height: 44px;
+    min-width: unset;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    letter-spacing: normal;
+}
+
+.btn-print {
+    background-color: #5dade2; /* azul claro */
+}
+
+.btn-print:hover {
+    background-color: #3498db;
+}
+
+.btn-export {
+    background-color: #58d68d; /* verde */
+}
+
+.btn-export:hover {
+    background-color: #2ecc71;
+}
+
+.btn-icon i {
+    pointer-events: none;
+}
+
+.btn-danger.btn-icon {
+    padding: 0;
+    min-width: unset;
+    border-radius: 50%;
+}
+
+.btn-remove-item {
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+
+

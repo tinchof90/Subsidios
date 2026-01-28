@@ -1,0 +1,728 @@
+/* src/components/Form.css */
+
+/* --- Estilos para el Formulario (mejor alineación en columnas) --- */
+.form-container {
+    background-color: var(--background-card);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+    margin-bottom: 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--border-color);
+}
+
+/* Estilo para los títulos H2 de sección dentro del form-container (ej: "Crear/Editar Expediente", "Resoluciones") */
+.form-container h2.form-title {
+    color: var(--text-color-dark);
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    grid-column: 1 / -1; /* ¡IMPORTANTE! Hace que el h2 abarque todas las columnas de la Grid del formulario */
+}
+
+/* Estilo para los títulos H3 de subsección/componentes (ej: "Resoluciones del Expediente" dentro de ResolucionLista) */
+.form-subtitle {
+    color: var(--text-color-dark);
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: 600;
+    display: block;
+    width: 100%;
+    grid-column: 1 / -1;
+}
+
+/* Estilo para los títulos H4 de sub-subsección (ej: "Ítems de la Resolución" dentro de ResolucionForm) */
+.form-sub-subtitle {
+    color: var(--text-color-dark);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    grid-column: 1 / -1; /* Asegura que ocupe todo el ancho */
+}
+
+.form-container form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.form-group-placeholder {
+    visibility: hidden;   /* ocupa espacio pero no se ve */
+}
+
+
+.form-group label {
+    width: 100%;
+    font-weight: 500;
+    color: var(--text-color-dark);
+    text-align: left;
+    font-size: 1em;
+}
+
+.form-checkbox {
+  width: 40px;
+  height: 40px;
+}
+
+.form-group-checkbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fcfcfc;
+}
+
+.form-input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.25);
+    outline: none;
+}
+
+.input-error {
+    border-color: var(--error-color);
+}
+
+.form-error {
+    color: var(--error-color);
+    font-size: 0.85em;
+    margin-top: 5px;
+    text-align: left;
+    width: 100%;
+    grid-column: 1 / -1; /* Asegura que los errores de API ocupen todo el ancho */
+}
+
+.button-group {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 25px;
+}
+
+.button-group-center { /* Para centrar botones */
+    grid-column: 1 / -1; /* ¡IMPORTANTE! Hace que el grupo de botones abarque todas las columnas de la Grid */
+    display: flex;
+    justify-content: center;
+    gap: 600px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    padding: 12px 25px;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--shadow-light);
+    min-width: 150px;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.btn-primary:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+.btn-secondary {
+    padding: 12px 25px;
+    background-color: #b2babb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--shadow-light);
+    min-width: 150px;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: #99a3a4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.btn-secondary:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+/* Estilos mejorados para btn-danger */
+.btn-danger {
+    padding: 12px 25px;
+    background-image: linear-gradient(to right, #e74c3c 0%, #c0392b 100%); /* Degradado de rojo */
+    color: var(--text-color-light);
+    border: 1px solid #a93226; /* Borde más oscuro */
+    border-radius: 8px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.2s ease; /* Transición para todos los cambios */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+    min-width: 120px;
+    margin: 10px;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-image: linear-gradient(to right, #c0392b 0%, #e74c3c 100%); /* Invertir degradado al pasar el ratón */
+    transform: translateY(-2px); /* Pequeño levantamiento */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra aún más fuerte */
+}
+
+.btn-danger:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+    background-image: none; /* Eliminar degradado cuando está deshabilitado */
+}
+
+/* Estilo específico para btn-small dentro de btn-danger, como para eliminar ítems */
+.btn-danger.btn-small {
+    padding: 8px 15px; /* Menor padding para botones pequeños */
+    font-size: 0.9em;
+    min-width: unset; /* Quita el min-width si es pequeño */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger.btn-small:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Sección de Subida de Archivos --- */
+.file-upload-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+    text-align: left;
+    grid-column: 1 / -1; /* Asegura que ocupe todo el ancho en la Grid */
+}
+
+.file-upload-section h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    color: var(--text-color-dark);
+    text-align: center;
+}
+
+.file-upload-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #fcfcfc;
+}
+
+.file-upload-controls input[type="file"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95em;
+    max-width: 400px;
+    cursor: pointer;
+}
+
+.file-upload-controls .btn-primary {
+    padding: 10px 20px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+.file-list {
+    margin-top: 20px;
+    grid-column: 1 / -1; /* Asegura que ocupe todo el ancho en la Grid */
+}
+
+.file-list h4 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #555;
+    text-align: center;
+}
+
+.file-list ul {
+    list-style: none;
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-item a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease;
+}
+
+.file-item a:hover {
+    color: var(--secondary-dark);
+    text-decoration: underline;
+}
+
+.btn-delete-file {
+    background-color: #EF5350;
+    color: var(--text-color-light);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.btn-delete-file:hover {
+    background-color: #D32F2F;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .form-container form {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .button-group, .button-group-center {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .btn-primary, .btn-secondary, .btn-cancel {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .file-upload-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .file-upload-controls input[type="file"] {
+        max-width: unset;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container h2.form-title {
+        font-size: 1.8em;
+    }
+    .form-input, .form-group label {
+        font-size: 0.9em;
+    }
+    .modal-content {
+        padding: 15px 20px;
+        max-width: 95%;
+    }
+
+    .modal-title {
+        font-size: 1.5em;
+    }
+
+    .modal-close-button {
+        font-size: 1.8em;
+    }
+} /* <--- corchete de cierre media query */
+
+/* --- ESTILOS ESPECÍFICOS PARA LOS GRUPOS DE ÍTEMS DE RESOLUCIÓN --- */
+.item-resolucion-group {
+    grid-column: 1 / -1; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #f8f8f8;
+}
+
+.item-resolucion-group .form-group {
+    width: 100%;
+}
+
+.item-resolucion-group .btn-danger.btn-small {
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+.btn-add-item {
+    grid-column: 1 / -1;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+/* --- ESTILOS ESPECÍFICOS PARA REACT-SELECT --- */
+.react-select-container {
+    width: 100%;
+}
+
+.react-select__control {
+    min-width: 200px;
+}
+
+.react-select-container.input-error .react-select__control {
+    border-color: var(--color-danger, #dc3545) !important;
+}
+
+.api-error {
+    text-align: center;
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* --- Estilos para el Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--background-card);
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-large);
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+    font-size: 1.8em;
+    color: var(--text-color-dark);
+    margin: 0;
+}
+
+.modal-close-button {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: var(--text-color-dark);
+    line-height: 1;
+    padding: 0 5px;
+    transition: color 0.2s ease;
+}
+
+.modal-close-button:hover {
+    color: var(--error-color);
+}
+
+.modal-body {
+    padding-top: 10px;
+}
+
+/* NUEVO: Centrado y ancho para resolution-list-container */
+.resolution-list-container {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.resolution-list-container .table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Permite scroll horizontal si es necesario */
+}
+
+/* --- Estilos específicos para la tabla de resoluciones --- */
+.resolution-list-container .resoluciones-table-specific {
+    width: 100%;
+    table-layout: fixed; /* Fija la distribución de columnas */
+    word-wrap: break-word;
+    word-break: break-word;
+    border-collapse: collapse;
+}
+
+.resolution-list-container .resoluciones-table-specific th,
+.resolution-list-container .resoluciones-table-specific td {
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.resolution-list-container .resoluciones-table-specific th:nth-child(3),
+.resolution-list-container .resoluciones-table-specific td:nth-child(3) {
+    width: 250px; /* Limita ancho columna Descripción */
+    white-space: normal;
+}
+
+.resolution-list-container .resoluciones-table-specific th:nth-child(6),
+.resolution-list-container .resoluciones-table-specific td:nth-child(6) {
+    width: 200px; /* Limita ancho columna Ítems */
+    white-space: normal;
+}
+
+/* Opcional: estilo de lista dentro de la columna Ítems */
+.resolution-list-container .resoluciones-table-specific .item-list {
+    padding-left: 15px;
+    margin: 0;
+    list-style-type: disc;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container input {
+  text-align: center;
+}
+
+.form-actions {
+    grid-column: 1 / -1; /* Asegura que el grupo ocupe todo el ancho de la grid */
+    display: flex; 
+    gap: 15px; /* ⬅️ Esto da la separación deseada de 15px entre el botón Guardar y Cancelar */
+    justify-content: flex-end; /* Alinea los botones a la derecha del formulario */
+    margin-top: 25px; 
+}
+
+.alert-error {
+    /* Basado en tu .api-error, pero más prominente */
+    grid-column: 1 / -1;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    background-color: var(--error-color-light, #f8d7da); /* Fondo rojo claro */
+    border: 1px solid var(--error-color, #f5c6cb); /* Borde rojo */
+    color: var(--error-color-dark, #721c24); /* Texto rojo oscuro */
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: 500;
+    text-align: center;
+}
+.alert-error p {
+    margin: 0; /* Elimina el margen por defecto del párrafo */
+}
+
+/* Alerta pequeña para información (ej: campo deshabilitado) */
+.alert-info-small {
+    padding: 6px 10px;
+    margin-bottom: 5px; /* Pequeña separación del campo */
+    background-color: var(--primary-color-light, #eaf7ff); /* Fondo azul claro */
+    border: 1px solid var(--secondary-color, #cce5ff); /* Borde azul */
+    color: var(--primary-color-dark, #004085); /* Texto azul oscuro */
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-weight: 400;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilo para textos de ayuda, si prefieres no usar una alerta */
+.help-text {
+    font-size: 0.8em;
+    color: var(--text-color-light-gray, #6c757d);
+    margin-top: -5px; /* Acércalo al campo */
+    margin-bottom: 10px;
+}
+
+/* Estilo general para inputs deshabilitados (esto ya lo manejas con :disabled) */
+.form-input:disabled {
+    background-color: #e9ecef !important; /* Color más claro para indicar inactividad */
+    cursor: not-allowed;
+    color: #6c757d;
+}
+
+/* Estilo específico para inputs que están deshabilitados por la lógica de edición (Ej: Año) */
+.form-input.input-disabled-edit {
+    border: 1px dashed var(--border-color); /* Borde punteado para indicar que no se puede cambiar */
+    background-color: #f5f5f5; /* Fondo ligeramente diferente */
+}
+
+/* --- ESTILO PARA FILAS DE 2 COLUMNAS COMPACTAS (MODIFICACIÓN) --- */
+.form-row-2-cols {
+    grid-column: 1 / -1; 
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    
+    /* ⬅️ ¡CAMBIA ESTE VALOR! */
+    gap: 40px; 
+    /* ⬆️ Puedes usar 30px, 40px, o lo que mejor se vea */
+    
+    margin-bottom: 20px; 
+}
+
+.form-input[type="date"] {
+    /* 1. Unificar Tipografía y Tamaño con el resto de inputs */
+    font-family: inherit;
+    font-size: 1em; /* Hereda del .form-input principal */
+    
+    /* 2. Centrar el texto (para igualar la apariencia) */
+    text-align: center; 
+    
+    /* 3. Ajustes de Apariencia */
+    /* Anular posibles flechas o colores de texto diferentes */
+    color: var(--text-color-dark, #333);     
+    /* Anula los estilos específicos del área de entrada de texto en Chrome/Safari */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;    
+    padding-right: 15px; /* Deja espacio a la derecha para el ícono del calendario */    
+}
+
+/* Estilo específico para el botón de agregar ítem */
+.btn-add-item-specific {
+    padding: 8px 15px; /* Más compacto que el botón principal */
+    font-size: 0.9em;
+    min-width: unset; /* Permite que el ancho sea el contenido */
+    box-shadow: var(--shadow-small);
+}
+
+.btn-add-item-specific:hover:not(:disabled) {
+    /* Mantén la transición de hover del .btn-secondary */
+    transform: translateY(-1px);
+}
+
+/* --- 1. Contenedor Principal (Centrado) --- */
+.items-main-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    grid-column: 1 / -1;
+}
+
+/* --- 2. Contenedor FLEXBOX (Divide el espacio en 2) --- */
+.items-wrapper-grid {
+    /* ⭐ CAMBIO CRÍTICO: Usar Flexbox para garantizar la disposición horizontal ⭐ */
+    display: flex;
+    justify-content: space-between; /* Distribuye los ítems en el espacio */
+    align-items: flex-start; /* Alinea los ítems por arriba */
+    
+    gap: 0; 
+    width: 100%; /* Ocupa todo el ancho disponible del padre */
+    
+    /* Nota: Si tienes un max-width aquí, ELIMÍNALO */
+}
+
+/* --- 3. Estilo del Ítem (Artículo) Individual --- */
+.item-resolucion-card { 
+    padding: 20px; 
+    box-sizing: border-box;
+    /* ⭐ AÑADE ESTO para forzar el ancho del 50% y la disposición en dos columnas ⭐ */
+    width: 100%;
+}
+
+/* --- 4. Línea Divisoria Vertical --- */
+/* Aplicamos el borde derecho SOLO al primer artículo (Artículo 1) */
+.item-resolucion-card:first-child {
+    border-right: 1px solid #ddd;
+}
+
+.item-remove-button-container {
+    grid-column: 1 / -1;   /* ocupa todo el ancho */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+.item-resolucion-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    gap: 20px;
+    align-items: start;
+}
+
+/* Nuevo estilo para el contador de cuotas */
+.cuotas-counter-full-width {
+    grid-column: 1 / -1; /* Obliga al contador a ocupar todas las columnas */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+}

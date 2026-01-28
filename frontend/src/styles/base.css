@@ -1,0 +1,14 @@
+/* src/styles/_base.css */
+body {
+    margin: 0;
+    font-family: 'Helvetica Light', sans-serif; /* Fuente más moderna y legible */
+    background-color: var(--background-light);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+    text-align: center;
+}

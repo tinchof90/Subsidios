@@ -1,0 +1,109 @@
+/* src/components/PaginationControls/PaginationControls.css */
+
+/* --- Controles de paginación --- */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Más espacio */
+    margin-top: 30px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Para responsive */
+}
+
+.pagination-controls button {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    padding: 10px 20px; /* Más padding */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: var(--secondary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.pagination-controls button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+/* Números de página */
+.pagination-numbers {
+    display: flex;
+    gap: 10px; /* Más espacio entre números */
+}
+
+.pagination-numbers .page-number {
+    background-color: #ECEFF1; /* Gris claro */
+    color: var(--text-color-dark);
+    padding: 10px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.pagination-numbers .page-number:hover:not(.active):not(:disabled) {
+    background-color: #CFD8DC; /* Tono más oscuro al pasar el ratón */
+    color: var(--text-color-dark);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.pagination-numbers .page-number.active {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    border-color: var(--secondary-color);
+    font-weight: bold;
+    cursor: default;
+    box-shadow: var(--shadow-light);
+}
+
+.pagination-numbers .page-number.disabled {
+    background-color: #F5F5F5;
+    color: #999;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Información de paginación */
+.pagination-info {
+    text-align: center;
+    color: #555;
+    font-size: 0.95em;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    /* CORREGIDO: Usar selectores de clase normales */
+    .pagination-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .pagination-controls button {
+        width: 100%;
+    }
+
+    .pagination-numbers {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pagination-numbers .page-number { /* Se especifica .page-number dentro de .pagination-numbers */
+        flex-shrink: 0;
+    }
+}

@@ -1,0 +1,36 @@
+/* src/styles/_layout.css */
+.content {
+    padding: 30px 20px;
+    margin-top: 10px;
+}
+
+.list-container {
+    width: 95%;
+    max-width: 1300px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: var(--background-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+}
+
+/* También movería los media queries relacionados con .list-container y .content aquí */
+@media (max-width: 992px) {
+    .list-container {
+        width: 98%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .list-container {
+        padding: 15px;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .list-container {
+        padding: 10px;
+    }
+}

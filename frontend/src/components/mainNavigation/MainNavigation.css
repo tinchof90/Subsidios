@@ -1,0 +1,72 @@
+/* --- Navegación Principal --- */
+.main-nav {
+    background-color: var(--text-color-dark);
+    padding: 10px 40px;
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    justify-content: center; /* Separa el logo de los enlaces */
+    align-items: center;
+}
+
+.nav-brand h3 {
+    color: var(--text-color-light);
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espaciado balanceado */
+}
+
+/* Estilo base de los enlaces definido en tu función setActiveClass */
+.nav-link {
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Estado al pasar el ratón (Hover) */
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color-light);
+}
+
+/* --- CLASE ACTIVA --- */
+/* Esta clase se activa automáticamente gracias a tu función setActiveClass */
+.nav-link.active {
+    background-color: var(--secondary-color); /* Color vibrante */
+    color: var(--text-color-light);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px); /* Efecto sutil de elevación */
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .nav-list {
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-link {
+        font-size: 0.95em;
+        padding: 8px 12px;
+    }
+}

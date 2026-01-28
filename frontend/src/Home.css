@@ -1,0 +1,64 @@
+/* ---------------------------------------------------------------------
+   src/styles/Home.css - Versión Modernizada
+--------------------------------------------------------------------- */
+
+/* === 1. CONTENEDOR PRINCIPAL === */
+.home-screen-container {
+    /* Centrado y Dimensión */
+    padding: 70px 30px;
+    max-width: 750px; /* Un poco más ancho */
+    margin: 60px auto 20px auto; 
+    text-align: center;
+
+    /* Apariencia Moderna */
+    background-color: var(--background-page); /* Usa el fondo de la página, para un look más "flotante" */
+    border-radius: 20px; /* Bordes más generosos */
+    
+    /* Sombra Suave y Moderna (Más dispersa y menos opaca) */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), /* Sombra principal ligera */
+                0 0 0 1px rgba(0, 0, 0, 0.05); /* Borde sutil */
+
+    border: none; /* Eliminamos el borde duro */
+    
+    /* Transiciones suaves para efectos hover */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.home-screen-container:hover {
+    /* Efecto sutil al pasar el ratón para dar interactividad */
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12),
+                0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* === 3. BOTÓN (Ajuste de margen) === */
+
+.home-screen-container .btn-primary {
+    /* Quitamos el margin-top de la clase m-top-40 y lo integramos al párrafo */
+    
+    /* Apariencia del botón mejorada */
+    padding: 15px 30px; 
+    font-size: 1.2em; 
+    font-weight: 500;
+    border-radius: 12px; /* Bordes más modernos para el botón */
+    
+    /* Sombra del botón para destacarlo (opcional, si no está en tu tema base) */
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+    transition: all 0.2s ease-in-out;
+    background-color: #072569 ;
+}
+
+.home-screen-container .btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+    transform: translateY(-2px);
+    background-color: #22AB74 !important;
+}
+
+/* === 2.1. ESTILOS PARA EL LOGO === */
+.home-screen-container .home-logo {
+    /* Ajusta el tamaño de la imagen */
+    max-width: 600px; /* Tamaño máximo para el logo */
+    height: auto;
+    display: block; /* Asegura que se comporte como un bloque para centrar */
+    margin: 0 auto 30px auto; /* Centrar horizontalmente y dar margen inferior */
+}
